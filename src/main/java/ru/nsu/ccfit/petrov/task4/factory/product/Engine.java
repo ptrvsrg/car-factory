@@ -4,6 +4,6 @@ public class Engine
     extends Product {
 
     public Engine() {
-        super();
+        super("Engine");
     }
 }

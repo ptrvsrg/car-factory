@@ -4,6 +4,6 @@ public class SeatCover
     extends Product {
 
     public SeatCover() {
-        super();
+        super("Seat Cover");
     }
 }

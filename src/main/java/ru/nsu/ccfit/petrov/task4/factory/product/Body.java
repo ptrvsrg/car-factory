@@ -4,6 +4,6 @@ public class Body
     extends Product {
 
     public Body() {
-        super();
+        super("Body");
     }
 }
