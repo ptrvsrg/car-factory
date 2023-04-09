@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.petrov.task4.factory.product;
 
 public class Engine
-    extends Product {
+    extends Detail {
 
     public Engine() {
         super("Engine");
