@@ -45,7 +45,8 @@ public class Supplier<T extends Detail>
                 logger.info(
                     product.getName() + " supplier " + id + " create " + product.getName() + " "
                         + product.getId());
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | IllegalAccessException | InvocationTargetException |
+                     InstantiationException | NoSuchMethodException e) {
                 logger.warn(e);
                 return;
             } catch (IllegalAccessException | InvocationTargetException |
