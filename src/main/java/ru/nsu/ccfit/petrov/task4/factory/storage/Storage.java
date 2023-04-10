@@ -64,8 +64,4 @@ public class Storage<T extends Product> {
 
         return product;
     }
-
-    public synchronized int getProductCount() {
-        return products.size();
-    }
 }
