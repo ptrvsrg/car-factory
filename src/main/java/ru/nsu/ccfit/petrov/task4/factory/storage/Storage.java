@@ -16,12 +16,16 @@ public class Storage<T extends Product> {
         this.products = new ArrayDeque<>(capacity);
     }
 
-    private synchronized boolean isFull() {
-        return products.size() >= capacity;
+    private boolean isFull() {
+        synchronized (products) {
+            return products.size() >= capacity;
+        }
     }
 
-    private synchronized boolean isEmpty() {
-        return products.isEmpty();
+    private boolean isEmpty() {
+        synchronized (products) {
+            return products.isEmpty();
+        }
     }
 
     public void putProduct(T product) {
