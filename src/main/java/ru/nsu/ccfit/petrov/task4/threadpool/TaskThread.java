@@ -1,13 +1,12 @@
 package ru.nsu.ccfit.petrov.task4.threadpool;
 
 import java.util.concurrent.BlockingQueue;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class TaskThread
     extends Thread {
 
-    private static final Logger logger = LogManager.getLogger();
     private final BlockingQueue<Task> queue;
 
     public TaskThread(BlockingQueue<Task> queue) {
@@ -21,7 +20,7 @@ public class TaskThread
                 Task task = queue.take();
                 task.execute();
             } catch (InterruptedException e) {
-                logger.warn(e);
+                log.warn(e);
             }
         }
     }
