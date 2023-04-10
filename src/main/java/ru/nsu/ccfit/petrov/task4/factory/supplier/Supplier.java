@@ -3,15 +3,14 @@ package ru.nsu.ccfit.petrov.task4.factory.supplier;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 import lombok.Setter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Detail;
 import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 
+@Log4j2
 public class Supplier<T extends Detail>
     extends Thread {
 
-    private static final Logger logger = LogManager.getLogger(Supplier.class);
     private final UUID id;
     private final Storage<T> storage;
     private final Class<T> detailClass;
@@ -42,12 +41,12 @@ public class Supplier<T extends Detail>
 
                 T product = detailClass.getDeclaredConstructor().newInstance();
                 storage.putProduct(product);
-                logger.info(
+                log.info(
                     product.getName() + " supplier " + id + " create " + product.getName() + " "
                         + product.getId());
             } catch (InterruptedException | IllegalAccessException | InvocationTargetException |
                      InstantiationException | NoSuchMethodException e) {
-                logger.warn(e);
+                log.warn(e);
                 return;
             }
         }
