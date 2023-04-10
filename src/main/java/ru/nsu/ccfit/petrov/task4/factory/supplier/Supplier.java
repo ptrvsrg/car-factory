@@ -49,9 +49,6 @@ public class Supplier<T extends Detail>
                      InstantiationException | NoSuchMethodException e) {
                 logger.warn(e);
                 return;
-            } catch (IllegalAccessException | InvocationTargetException |
-                InstantiationException | NoSuchMethodException e) {
-                logger.warn(e);
             }
         }
     }
