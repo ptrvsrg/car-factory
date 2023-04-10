@@ -1,13 +1,14 @@
 package ru.nsu.ccfit.petrov.task4.factory.storage;
 
 import java.util.ArrayDeque;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Product;
+import ru.nsu.ccfit.petrov.task4.observer.Observable;
 
-public class Storage<T extends Product> {
+@Log4j2
+public class Storage<T extends Product>
+    extends Observable {
 
-    private static final Logger logger = LogManager.getLogger(Storage.class);
     private final ArrayDeque<T> products;
     private final int capacity;
 
@@ -34,7 +35,7 @@ public class Storage<T extends Product> {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
-                    logger.warn(e);
+                    log.warn(e);
                 }
             }
 
@@ -52,7 +53,7 @@ public class Storage<T extends Product> {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
-                    logger.warn(e);
+                    log.warn(e);
                 }
             }
 
