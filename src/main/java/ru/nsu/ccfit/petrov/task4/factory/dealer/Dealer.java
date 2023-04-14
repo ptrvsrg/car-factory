@@ -38,7 +38,8 @@ public class Dealer
             }
 
             Car car = carStorage.takeProduct();
-            log.info("Dealer " + id + " bought car" + car.getId());
+
+            log.info(String.format("Dealer <%s> bought %s", id, car));
         }
     }
 }
