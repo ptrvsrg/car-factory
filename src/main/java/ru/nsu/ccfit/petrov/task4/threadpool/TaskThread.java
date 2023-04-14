@@ -1,20 +1,21 @@
 package ru.nsu.ccfit.petrov.task4.threadpool;
 
 import java.util.concurrent.BlockingQueue;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class TaskThread
     extends Thread {
 
-    private final BlockingQueue<Task> queue;
-
-    public TaskThread(BlockingQueue<Task> queue) {
-        this.queue = queue;
-    }
+    @Setter private BlockingQueue<Task> queue;
 
     @Override
     public void run() {
+        if (queue == null) {
+            throw new UnsupportedOperationException("Queue is not set");
+        }
+
         while (true) {
             try {
                 Task task = queue.take();
