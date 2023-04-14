@@ -1,25 +1,21 @@
 package ru.nsu.ccfit.petrov.task4.factory.dealer;
 
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Car;
 import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 
 @Log4j2
+@RequiredArgsConstructor
 public class Dealer
     extends Thread {
 
-    private final UUID id;
+    private static final int MINUTE = 60000;
+    private final UUID id = UUID.randomUUID();
     private final Storage<Car> carStorage;
-    @Setter
-    private int saleTime;
-
-    public Dealer(Storage<Car> carStorage, int saleTime) {
-        this.id = UUID.randomUUID();
-        this.carStorage = carStorage;
-        this.saleTime = saleTime;
-    }
+    @Setter private int saleTime = MINUTE;
 
     /**
      * If this thread was constructed using a separate {@code Runnable} run object, then that
