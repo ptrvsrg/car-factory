@@ -20,12 +20,12 @@ public class Observable {
      *
      * @param observer the observer
      */
-    public void addObserver(Observer observer) {
+    public boolean addObserver(Observer observer) {
         if (observers == null) {
             observers = new HashSet<>();
         }
 
-        observers.add(observer);
+        return observers.add(observer);
     }
 
     /**
@@ -33,12 +33,12 @@ public class Observable {
      *
      * @param observer the observer
      */
-    public void removeObserver(Observer observer) {
+    public boolean removeObserver(Observer observer) {
         if (observers == null) {
-            return;
+            return true;
         }
 
-        observers.remove(observer);
+        return observers.remove(observer);
     }
 
     /**
