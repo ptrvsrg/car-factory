@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Product;
 import ru.nsu.ccfit.petrov.task4.observer.Observable;
+import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 
 @Log4j2
 public class Storage<T extends Product>
@@ -45,10 +46,12 @@ public class Storage<T extends Product>
             }
 
             products.add(product);
-
             products.notifyAll();
 
             totalProductCount++;
+
+            notifyObservers(new StorageMovingContext(getCurrentProductCount(), capacity,
+                                                     totalProductCount));
         }
     }
 
@@ -65,9 +68,10 @@ public class Storage<T extends Product>
             }
 
             product = products.remove();
-
             products.notifyAll();
 
+            notifyObservers(new StorageMovingContext(getCurrentProductCount(), capacity,
+                                                     totalProductCount));
         }
 
         return product;
