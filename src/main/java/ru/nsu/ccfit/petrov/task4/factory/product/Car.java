@@ -16,4 +16,9 @@ public class Car
         this.body = body;
         this.seatCover = seatCover;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s, %s, %s)", super.toString(), engine, body, seatCover);
+    }
 }
