@@ -24,4 +24,10 @@ public class ThreadPool {
             thread.start();
         }
     }
+
+    public void stop() {
+        for (TaskThread thread : threads) {
+            thread.interrupt();
+        }
+    }
 }
