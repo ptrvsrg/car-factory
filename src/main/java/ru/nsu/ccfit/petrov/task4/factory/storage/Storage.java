@@ -52,8 +52,8 @@ public class Storage<T extends Product>
 
             totalProductCount++;
 
-            notifyObservers(new StorageMovingContext(getCurrentProductCount(), capacity,
-                                                     totalProductCount));
+            notifyObservers(
+                new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
         }
     }
 
@@ -72,8 +72,8 @@ public class Storage<T extends Product>
             product = products.remove();
             products.notifyAll();
 
-            notifyObservers(new StorageMovingContext(getCurrentProductCount(), capacity,
-                                                     totalProductCount));
+            notifyObservers(
+                new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
         }
 
         return product;

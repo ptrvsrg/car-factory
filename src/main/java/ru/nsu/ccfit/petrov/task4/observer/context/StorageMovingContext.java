@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 public class StorageMovingContext
     implements Context {
 
-    private final int currentProductCount;
     private final int capacity;
+    private final int currentProductCount;
     private final int totalProductCount;
 }
