@@ -7,11 +7,6 @@ import lombok.Getter;
 public class Product {
 
     private final UUID id = UUID.randomUUID();
-    private final String name;
-
-    public Product(String name) {
-        this.name = name;
-    }
 
     @Override
     public String toString() {

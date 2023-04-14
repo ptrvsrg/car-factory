@@ -11,7 +11,6 @@ public class Car
     private final SeatCover seatCover;
 
     public Car(Engine engine, Body body, SeatCover seatCover) {
-        super("Car");
         this.engine = engine;
         this.body = body;
         this.seatCover = seatCover;
