@@ -1,7 +1,7 @@
 package ru.nsu.ccfit.petrov.task4.observer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import ru.nsu.ccfit.petrov.task4.observer.context.Context;
 
 /**
@@ -13,7 +13,7 @@ import ru.nsu.ccfit.petrov.task4.observer.context.Context;
  */
 public class Observable {
 
-    private List<Observer> observers;
+    private Set<Observer> observers;
 
     /**
      * Adds observer.
@@ -22,7 +22,7 @@ public class Observable {
      */
     public void addObserver(Observer observer) {
         if (observers == null) {
-            observers = new ArrayList<>();
+            observers = new HashSet<>();
         }
 
         observers.add(observer);
