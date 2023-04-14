@@ -20,7 +20,9 @@ public class Storage<T extends Product>
     }
 
     public int getCurrentProductCount() {
-        return products.size();
+        synchronized (products) {
+            return products.size();
+        }
     }
 
     private boolean isFull() {
