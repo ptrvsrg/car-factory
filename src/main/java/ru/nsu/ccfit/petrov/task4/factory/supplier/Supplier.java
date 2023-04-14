@@ -37,7 +37,7 @@ public class Supplier<T extends Detail>
                 T product = detailClass.getDeclaredConstructor().newInstance();
                 storage.putProduct(product);
 
-                log.info(String.format("%s supplier <%s> delivered %s", product.getName(), id, product));
+                log.info(String.format("%s supplier <%s> delivered %s", product.getClass().getSimpleName(), id, product));
             } catch (InterruptedException | IllegalAccessException | InvocationTargetException |
                      InstantiationException | NoSuchMethodException e) {
                 log.warn(e);
