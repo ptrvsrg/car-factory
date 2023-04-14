@@ -10,6 +10,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("%s <%s>", name, id);
+        return String.format("%s <%s>", getClass().getSimpleName(), id);
     }
 }
