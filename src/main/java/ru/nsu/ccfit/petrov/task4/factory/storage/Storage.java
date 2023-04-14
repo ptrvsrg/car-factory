@@ -11,6 +11,7 @@ public class Storage<T extends Product>
 
     private final ArrayDeque<T> products;
     private final int capacity;
+    private int totalProductCount = 0;
 
     public Storage(int capacity) {
         this.capacity = capacity;
@@ -46,6 +47,8 @@ public class Storage<T extends Product>
             products.add(product);
 
             products.notifyAll();
+
+            totalProductCount++;
         }
     }
 
