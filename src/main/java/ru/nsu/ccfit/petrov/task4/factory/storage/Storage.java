@@ -17,6 +17,10 @@ public class Storage<T extends Product>
         this.products = new ArrayDeque<>(capacity);
     }
 
+    public int getCurrentProductCount() {
+        return products.size();
+    }
+
     private boolean isFull() {
         synchronized (products) {
             return products.size() >= capacity;
