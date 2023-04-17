@@ -20,6 +20,7 @@ public class CarStorageController
     private final Storage<Body> bodyStorage;
     private final Storage<SeatCover> accessoryStorage;
     private final Storage<Car> carStorage;
+    private final WorkerDepartment workerDepartment;
 
     public CarStorageController(Storage<Engine> engineStorage, Storage<Body> bodyStorage,
                                 Storage<SeatCover> accessoryStorage, Storage<Car> carStorage,
@@ -33,8 +34,6 @@ public class CarStorageController
         carStorage.addObserver(this);
     }
 
-    private final WorkerDepartment workerDepartment;
-
     /**
      * Handles the context of the {@link Observable Observable} object message.
      *
@@ -42,12 +41,12 @@ public class CarStorageController
      */
     @Override
     public void update(Context context) {
-        String contextName = context.getClass().getSimpleName();
-        if (contextName.equals(StorageMovingContext.class.getSimpleName())) {
-            StorageMovingContext storageMovingContext = (StorageMovingContext) context;
-            evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(),
-                                  FactoryConfig.getCarStorageCapacity());
+        if (!context.getClass().equals(StorageMovingContext.class)) {
+            return;
         }
+
+        evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(),
+                              FactoryConfig.getCarStorageCapacity());
     }
 
     private void evaluateStorageStatus(int currentProductCount, int capacity) {
