@@ -6,12 +6,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.SwingBackgroundPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.SwingMenuButton;
@@ -41,7 +44,8 @@ public class SwingStartMenu {
         frame.setSize(800, 600);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowClosingListener());
 
         URL url = SwingStartMenu.class.getClassLoader().getResource(BACKGROUND_IMAGE_FILE);
         Image backgroundImage = Toolkit.getDefaultToolkit().getImage(url);
@@ -98,4 +102,28 @@ public class SwingStartMenu {
                                           JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
+    @RequiredArgsConstructor
+    private class WindowClosingListener
+        extends WindowAdapter {
+
+        private static final String EXIT_CONFIRM_TITLE = "Confirmation";
+        private static final String EXIT_CONFIRM_MESSAGE = "Are you sure?";
+
+        /**
+         * Invoked when a window is in the process of being closed. The close operation can be overridden at this point.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void windowClosing(WindowEvent e) {
+            int res = JOptionPane.showConfirmDialog(frame, EXIT_CONFIRM_MESSAGE, EXIT_CONFIRM_TITLE,
+                                                    JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION) {
+                frame.dispose();
+                System.exit(0);
+            }
+        }
+    }
 }
+
