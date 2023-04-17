@@ -1,6 +1,15 @@
 package ru.nsu.ccfit.petrov.task4.factory.worker;
 
+import java.util.UUID;
 import ru.nsu.ccfit.petrov.task4.threadpool.TaskThread;
 
 public class Worker
-    extends TaskThread {}
+    extends TaskThread {
+
+    private final UUID id = UUID.randomUUID();
+
+    @Override
+    public String toString() {
+        return String.format("Worker <%s>", id);
+    }
+}
