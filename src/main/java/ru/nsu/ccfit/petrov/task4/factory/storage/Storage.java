@@ -57,7 +57,7 @@ public class Storage<T extends Product>
 
             // Notify observers about storage state changing
             notifyObservers(
-                new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
+                new StorageMovingContext(getCurrentProductCount(), totalProductCount));
         }
     }
 
@@ -82,7 +82,7 @@ public class Storage<T extends Product>
 
             // Notify observers about storage state changing
             notifyObservers(
-                new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
+                new StorageMovingContext(getCurrentProductCount(), totalProductCount));
         }
 
         return product;

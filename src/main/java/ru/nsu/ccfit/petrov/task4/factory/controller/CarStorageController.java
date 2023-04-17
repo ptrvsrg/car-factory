@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.petrov.task4.factory.controller;
 
+import ru.nsu.ccfit.petrov.task4.factory.config.FactoryConfig;
 import ru.nsu.ccfit.petrov.task4.factory.product.Body;
 import ru.nsu.ccfit.petrov.task4.factory.product.Car;
 import ru.nsu.ccfit.petrov.task4.factory.product.Engine;
@@ -44,16 +45,15 @@ public class CarStorageController
         String contextName = context.getClass().getSimpleName();
         if (contextName.equals(StorageMovingContext.class.getSimpleName())) {
             StorageMovingContext storageMovingContext = (StorageMovingContext) context;
-            evaluateStorageStatus(storageMovingContext.getCurrentProductCount(),
-                                  storageMovingContext.getCapacity());
+            evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(),
+                                  FactoryConfig.getCarStorageCapacity());
         }
     }
 
     private void evaluateStorageStatus(int currentProductCount, int capacity) {
         int minProductCount = (int) (capacity * 0.75);
         if (currentProductCount < minProductCount) {
-            workerDepartment.addTask(
-                new AssemblingTask(engineStorage, bodyStorage, accessoryStorage, carStorage));
+            workerDepartment.addTask(new AssemblingTask(engineStorage, bodyStorage, accessoryStorage, carStorage));
         }
     }
 }
