@@ -1,10 +1,10 @@
 package ru.nsu.ccfit.petrov.task4.ui.view.gui.components;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JSlider;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
@@ -26,36 +26,53 @@ public abstract class SwingInfoPanel
     private static final int FONT_SIZE = 20;
     protected final UIController controller;
     private final JLabel totalProductCounter = new JLabel();
-    private final JLabel currentProductCounter = new JLabel();
+    private final JProgressBar currentProductCounter = new JProgressBar();
     private final JSlider timeSlider = new JSlider(JSlider.HORIZONTAL);
 
     protected SwingInfoPanel(UIController controller) {
         this.controller = controller;
 
-        setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        setBackground(Color.WHITE);
-        setLayout(new GridLayout(3, 2));
-
-        initSlider();
-
-        add(createTitleLabel(getTotalProductCounterTitle()));
-        add(createTitleLabel(getCurrentProductCounterTitle()));
-        add(createTitleLabel(getTimeSliderTitle()));
-
-        add(totalProductCounter);
-        add(currentProductCounter);
-        add(timeSlider);
+        initTotalProductCount();
+        initCurrentProductCount();
+        initTimeSlider();
+        initPanel();
     }
 
-    protected abstract String getTotalProductCounterTitle();
+    private void initTotalProductCount() {
+        totalProductCounter.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
+        setTotalProductCount(0);
+    }
 
-    protected abstract String getCurrentProductCounterTitle();
+    private void initCurrentProductCount() {
+        currentProductCounter.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
+        setCurrentProductCount(0);
+    }
 
-    protected abstract String getTimeSliderTitle();
+    private void initTimeSlider() {
+        timeSlider.setMinimum(0);
+        timeSlider.setMaximum(SLIDER_MAX_VALUE);
+        timeSlider.setValue(SLIDER_MAX_VALUE / 2);
+        timeSlider.setMajorTickSpacing(SLIDER_MAJOR_SPACING);
+        timeSlider.setPaintTrack(true);
+        timeSlider.setPaintLabels(true);
+        timeSlider.addChangeListener(new SliderListener());
 
-    protected abstract int getStorageCapacity();
+        setFactoryTime(SLIDER_MAX_VALUE / 2);
+    }
 
-    protected abstract void setFactoryTime(int time);
+    private void initPanel() {
+        setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+        setLayout(new GridLayout(3, 2, BORDER_SIZE, BORDER_SIZE));
+
+        add(createTitleLabel(getTotalProductCounterTitle()));
+        add(totalProductCounter);
+
+        add(createTitleLabel(getCurrentProductCounterTitle()));
+        add(currentProductCounter);
+
+        add(createTitleLabel(getTimeSliderTitle()));
+        add(timeSlider);
+    }
 
     private JLabel createTitleLabel(String title) {
         JLabel titleLabel = new JLabel();
@@ -64,25 +81,13 @@ public abstract class SwingInfoPanel
         return titleLabel;
     }
 
-    public void setTotalProductCount(Integer totalProductCount) {
-        totalProductCounter.setText(totalProductCount.toString());
-        totalProductCounter.repaint();
-    }
+    protected abstract void setFactoryTime(int time);
 
-    public void setCurrentProductCount(Integer currentProductCount) {
-        currentProductCounter.setText(String.format("%s / %s", currentProductCount, getStorageCapacity()));
-        currentProductCounter.repaint();
-    }
+    protected abstract String getTotalProductCounterTitle();
 
-    public void initSlider() {
-        timeSlider.setMinimum(0);
-        timeSlider.setMaximum(SLIDER_MAX_VALUE);
-        timeSlider.setValue(SLIDER_MAX_VALUE);
-        timeSlider.setMajorTickSpacing(SLIDER_MAJOR_SPACING);
-        timeSlider.setPaintTrack(true);
-        timeSlider.setPaintLabels(true);
-        timeSlider.addChangeListener(new SliderListener());
-    }
+    protected abstract String getCurrentProductCounterTitle();
+
+    protected abstract String getTimeSliderTitle();
 
     /**
      * Handles the context of the {@link Observable Observable} object message.
@@ -98,6 +103,20 @@ public abstract class SwingInfoPanel
         setCurrentProductCount(((StorageMovingContext) context).getCurrentProductCount());
         setTotalProductCount(((StorageMovingContext) context).getTotalProductCount());
     }
+
+    private void setTotalProductCount(Integer totalProductCount) {
+        totalProductCounter.setText(totalProductCount.toString());
+        totalProductCounter.repaint();
+    }
+
+    private void setCurrentProductCount(Integer currentProductCount) {
+        currentProductCounter.setString(String.format("%s / %s", currentProductCount, getStorageCapacity()));
+        currentProductCounter.setValue(100 * currentProductCount / getStorageCapacity());
+        currentProductCounter.setStringPainted(true);
+        currentProductCounter.repaint();
+    }
+
+    protected abstract int getStorageCapacity();
 
     @RequiredArgsConstructor
     private class SliderListener
