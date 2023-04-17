@@ -40,12 +40,37 @@ public class SwingGameSpace {
         frame.setTitle(TITLE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setLayout(new GridLayout(4, 1));
+        frame.addWindowListener(new WindowClosingListener());
 
         frame.add(engineInfoPanel);
         frame.add(bodyInfoPanel);
         frame.add(accessoryInfoPanel);
         frame.add(carInfoPanel);
+    }
+
+    @RequiredArgsConstructor
+    private class WindowClosingListener
+        extends WindowAdapter {
+
+        private static final String EXIT_CONFIRM_TITLE = "Confirmation";
+        private static final String EXIT_CONFIRM_MESSAGE = "Are you sure?";
+
+        /**
+         * Invoked when a window is in the process of being closed. The close operation can be overridden at this point.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void windowClosing(WindowEvent e) {
+            int res = JOptionPane.showConfirmDialog(frame, EXIT_CONFIRM_MESSAGE, EXIT_CONFIRM_TITLE,
+                                                    JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION) {
+                controller.stopFactory();
+                frame.dispose();
+                System.exit(0);
+            }
+        }
     }
 }
