@@ -1,8 +1,12 @@
 package ru.nsu.ccfit.petrov.task4.ui.view.gui;
 
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
+import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.AccessoryInfoPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.BodyInfoPanel;
