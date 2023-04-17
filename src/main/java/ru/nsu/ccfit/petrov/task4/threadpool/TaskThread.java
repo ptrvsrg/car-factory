@@ -13,7 +13,8 @@ public class TaskThread
     @Override
     public void run() {
         if (queue == null) {
-            throw new UnsupportedOperationException("Queue is not set");
+            log.error("Queue is not set");
+            return;
         }
 
         while (true) {
