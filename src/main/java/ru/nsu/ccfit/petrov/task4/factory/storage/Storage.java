@@ -1,6 +1,7 @@
 package ru.nsu.ccfit.petrov.task4.factory.storage;
 
 import java.util.ArrayDeque;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Product;
 import ru.nsu.ccfit.petrov.task4.observer.Observable;
@@ -11,7 +12,7 @@ public class Storage<T extends Product>
     extends Observable {
 
     private final ArrayDeque<T> products;
-    private final int capacity;
+    @Getter private final int capacity;
     private int totalProductCount = 0;
 
     public Storage(int capacity) {
