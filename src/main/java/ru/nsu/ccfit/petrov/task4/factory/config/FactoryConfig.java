@@ -3,6 +3,7 @@ package ru.nsu.ccfit.petrov.task4.factory.config;
 import java.io.InputStream;
 import java.util.Properties;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 
 /**
  * The type {@code FactoryConfig} is a util class that opens a config factory file, parses it and returns parameters.
@@ -13,7 +14,7 @@ import lombok.extern.log4j.Log4j2;
 public class FactoryConfig {
 
     private static final String FACTORY_PROPERTIES_FILE = "factory.properties";
-    private static final Properties factorySettings;
+    private static Properties factorySettings;
 
     private FactoryConfig() {
         throw new IllegalStateException("Utility class");
@@ -30,18 +31,20 @@ public class FactoryConfig {
             factorySettings = new Properties();
             factorySettings.load(configStream);
         } catch (Exception e) {
-            log.fatal(e);
-            throw new RuntimeException(e);
+            log.catching(Level.FATAL, e);
+            System.exit(1);
         }
     }
 
-    private static int parseInt(String s) {
+    private static Integer parseInt(String s) {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            log.fatal(e);
-            throw new RuntimeException(e);
+            log.catching(Level.FATAL, e);
+            System.exit(1);
         }
+
+        return null;
     }
 
     /**

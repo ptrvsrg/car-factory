@@ -17,11 +17,7 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        try {
-            UIController controller = new UIController();
-            SwingUtilities.invokeLater(() -> new StartMenuFrame(controller));
-        } catch (Exception e) {
-            System.exit(1);
-        }
+        UIController controller = new UIController();
+        SwingUtilities.invokeLater(() -> new StartMenuFrame(controller));
     }
 }
