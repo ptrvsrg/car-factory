@@ -12,18 +12,21 @@ public class TaskThread
 
     @Override
     public void run() {
-        if (queue == null) {
-            log.error("Queue is not set");
-            return;
-        }
-
         while (true) {
-            try {
-                Task task = queue.take();
-                task.execute();
-            } catch (InterruptedException e) {
-                log.warn(e);
+            if (queue == null) {
+                log.warn("Queue is not set");
+                continue;
             }
+
+            Task task;
+            try {
+                task = queue.take();
+            } catch (InterruptedException e) {
+                log.error(e);
+                return;
+            }
+
+            task.execute();
         }
     }
 }
