@@ -112,7 +112,7 @@ public class Factory {
         engineSupplier.interrupt();
         bodySupplier.interrupt();
         for (Supplier<SeatCover> accessorySupplier : accessorySuppliers) {
-            accessorySupplier.start();
+            accessorySupplier.interrupt();
         }
         workerDepartment.stop();
         for (Dealer dealer : dealers) {
