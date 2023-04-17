@@ -3,7 +3,7 @@ package ru.nsu.ccfit.petrov.task4.ui.view.gui.components;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 
 public class CarInfoPanel
-    extends SwingInfoPanel {
+    extends InfoPanel {
 
     public CarInfoPanel(UIController controller) {
         super(controller);

@@ -9,7 +9,7 @@ import javax.swing.JButton;
  *
  * @author ptrvsrg
  */
-public class SwingMenuButton
+public class MenuButton
     extends JButton {
     private static final int FONT_SIZE = 40;
 
@@ -18,7 +18,7 @@ public class SwingMenuButton
      *
      * @param text the text
      */
-    public SwingMenuButton(String text) {
+    public MenuButton(String text) {
         setText(text);
         setContentAreaFilled(false);
         setBorderPainted(false);

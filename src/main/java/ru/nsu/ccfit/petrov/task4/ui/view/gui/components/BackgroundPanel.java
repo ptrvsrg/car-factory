@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
  *
  * @author ptrvsrg
  */
-public class SwingBackgroundPanel
+public class BackgroundPanel
     extends JPanel {
 
     private static final int BORDER_SIZE = 30;
@@ -21,7 +21,7 @@ public class SwingBackgroundPanel
      *
      * @param backgroundImage the background image
      */
-    public SwingBackgroundPanel(Image backgroundImage) {
+    public BackgroundPanel(Image backgroundImage) {
         this.backgroundImage = backgroundImage;
 
         setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));

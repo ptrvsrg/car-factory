@@ -13,7 +13,7 @@ import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.BodyInfoPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.CarInfoPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.EngineInfoPanel;
 
-public class SwingGameSpace {
+public class GameSpaceFrame {
 
     private static final String TITLE = "Car Factory";
     private final JFrame frame = new JFrame();
@@ -23,7 +23,7 @@ public class SwingGameSpace {
     private final AccessoryInfoPanel accessoryInfoPanel;
     private final CarInfoPanel carInfoPanel;
 
-    public SwingGameSpace(UIController controller) {
+    public GameSpaceFrame(UIController controller) {
         this.controller = controller;
 
         controller.initFactory();

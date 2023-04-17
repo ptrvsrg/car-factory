@@ -16,7 +16,7 @@ import ru.nsu.ccfit.petrov.task4.observer.context.Context;
 import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 
-public abstract class SwingInfoPanel
+public abstract class InfoPanel
     extends JPanel
     implements Observer {
 
@@ -29,7 +29,7 @@ public abstract class SwingInfoPanel
     private final JProgressBar currentProductCounter = new JProgressBar();
     private final JSlider timeSlider = new JSlider(JSlider.HORIZONTAL);
 
-    protected SwingInfoPanel(UIController controller) {
+    protected InfoPanel(UIController controller) {
         this.controller = controller;
 
         initTotalProductCount();

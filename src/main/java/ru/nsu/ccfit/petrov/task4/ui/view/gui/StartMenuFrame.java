@@ -16,10 +16,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
-import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.SwingBackgroundPanel;
-import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.SwingMenuButton;
+import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.BackgroundPanel;
+import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.MenuButton;
 
-public class SwingStartMenu {
+public class StartMenuFrame {
 
     private static final String TITLE = "Welcome To Car Factory";
     private static final String BACKGROUND_IMAGE_FILE = "start_menu_background.png";
@@ -32,7 +32,7 @@ public class SwingStartMenu {
     private final JFrame frame = new JFrame();
     private final UIController controller;
 
-    public SwingStartMenu(UIController controller) {
+    public StartMenuFrame(UIController controller) {
         this.controller = controller;
 
         initFrame();
@@ -47,9 +47,9 @@ public class SwingStartMenu {
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowClosingListener());
 
-        URL url = SwingStartMenu.class.getClassLoader().getResource(BACKGROUND_IMAGE_FILE);
+        URL url = StartMenuFrame.class.getClassLoader().getResource(BACKGROUND_IMAGE_FILE);
         Image backgroundImage = Toolkit.getDefaultToolkit().getImage(url);
-        SwingBackgroundPanel contentPane = new SwingBackgroundPanel(backgroundImage);
+        BackgroundPanel contentPane = new BackgroundPanel(backgroundImage);
         contentPane.add(createButtonArea());
 
         frame.setContentPane(contentPane);
@@ -66,8 +66,8 @@ public class SwingStartMenu {
         return buttonArea;
     }
 
-    private SwingMenuButton createMenuButton(String title, ActionListener listener) {
-        SwingMenuButton startButton = new SwingMenuButton(title);
+    private MenuButton createMenuButton(String title, ActionListener listener) {
+        MenuButton startButton = new MenuButton(title);
         startButton.addActionListener(listener);
 
         return startButton;
@@ -84,7 +84,7 @@ public class SwingStartMenu {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
-            SwingUtilities.invokeLater(() -> new SwingGameSpace(controller));
+            SwingUtilities.invokeLater(() -> new GameSpaceFrame(controller));
         }
     }
 
