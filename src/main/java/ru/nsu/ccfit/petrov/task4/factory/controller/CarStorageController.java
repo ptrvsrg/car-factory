@@ -34,6 +34,10 @@ public class CarStorageController
         carStorage.addObserver(this);
     }
 
+    private void assembleCar() {
+        workerDepartment.addTask(new AssemblingTask(engineStorage, bodyStorage, accessoryStorage, carStorage));
+    }
+
     /**
      * Handles the context of the {@link Observable Observable} object message.
      *
@@ -49,10 +53,14 @@ public class CarStorageController
                               carStorage.getCapacity());
     }
 
-    private void evaluateStorageStatus(int currentProductCount, int capacity) {
-        int minProductCount = (int) (capacity * OCCUPANCY_PERCENTAGE);
-        if (currentProductCount < minProductCount) {
-            workerDepartment.addTask(new AssemblingTask(engineStorage, bodyStorage, accessoryStorage, carStorage));
+    private void evaluateStorageStatus(int currentCarCount, int carStorageCapacity) {
+        int minCarCount = (int) (carStorageCapacity * OCCUPANCY_PERCENTAGE);
+        int assemblingCarCount = workerDepartment.getQueueSize();
+
+        if (currentCarCount + assemblingCarCount < minCarCount) {
+            for (int i = 0; i < carStorageCapacity - minCarCount; ++i) {
+                assembleCar();
+            }
         }
     }
 }
