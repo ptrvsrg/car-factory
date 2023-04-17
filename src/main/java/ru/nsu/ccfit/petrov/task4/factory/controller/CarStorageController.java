@@ -1,6 +1,5 @@
 package ru.nsu.ccfit.petrov.task4.factory.controller;
 
-import ru.nsu.ccfit.petrov.task4.factory.config.FactoryConfig;
 import ru.nsu.ccfit.petrov.task4.factory.product.Body;
 import ru.nsu.ccfit.petrov.task4.factory.product.Car;
 import ru.nsu.ccfit.petrov.task4.factory.product.Engine;
@@ -47,7 +46,7 @@ public class CarStorageController
         }
 
         evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(),
-                              FactoryConfig.getCarStorageCapacity());
+                              carStorage.getCapacity());
     }
 
     private void evaluateStorageStatus(int currentProductCount, int capacity) {
