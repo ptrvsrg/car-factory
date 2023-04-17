@@ -29,7 +29,7 @@ public abstract class SwingInfoPanel
     private final JLabel currentProductCounter = new JLabel();
     private final JSlider timeSlider = new JSlider(JSlider.HORIZONTAL);
 
-    public SwingInfoPanel(UIController controller) {
+    protected SwingInfoPanel(UIController controller) {
         this.controller = controller;
 
         setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
