@@ -16,6 +16,7 @@ import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 public class CarStorageController
     implements Observer {
 
+    private static final float OCCUPANCY_PERCENTAGE = 0.75F;
     private final Storage<Engine> engineStorage;
     private final Storage<Body> bodyStorage;
     private final Storage<SeatCover> accessoryStorage;
@@ -50,7 +51,7 @@ public class CarStorageController
     }
 
     private void evaluateStorageStatus(int currentProductCount, int capacity) {
-        int minProductCount = (int) (capacity * 0.75);
+        int minProductCount = (int) (capacity * OCCUPANCY_PERCENTAGE);
         if (currentProductCount < minProductCount) {
             workerDepartment.addTask(new AssemblingTask(engineStorage, bodyStorage, accessoryStorage, carStorage));
         }
