@@ -13,11 +13,10 @@ import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 public class Supplier<T extends Detail>
     extends Thread {
 
-    private static final int MINUTE = 60000;
     private final UUID id = UUID.randomUUID();
     private final Storage<T> storage;
     private final Class<T> detailClass;
-    @Setter private int productionTime = MINUTE;
+    @Setter private Integer productionTime;
 
     /**
      * If this thread was constructed using a separate {@code Runnable} run object, then that
@@ -29,20 +28,27 @@ public class Supplier<T extends Detail>
     @Override
     public void run() {
         while (true) {
+            if (productionTime == null) {
+                log.warn("Production time is not set");
+                continue;
+            }
+            if (productionTime <= 0) {
+                log.warn("Production time is zero or negative");
+                continue;
+            }
+
+            T product;
             try {
-                if (productionTime > 0) {
-                    Thread.sleep(productionTime);
-                }
-
-                T product = detailClass.getDeclaredConstructor().newInstance();
-                storage.putProduct(product);
-
-                log.info(String.format("Supplier <%s> delivered %s", id, product));
+                Thread.sleep(productionTime);
+                product = detailClass.getDeclaredConstructor().newInstance();
             } catch (InterruptedException | IllegalAccessException | InvocationTargetException |
                      InstantiationException | NoSuchMethodException e) {
-                log.warn(e);
+                log.error(e);
                 return;
             }
+
+            storage.putProduct(product);
+            log.info(String.format("Supplier <%s> delivered %s", id, product));
         }
     }
 }

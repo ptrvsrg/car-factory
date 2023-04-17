@@ -12,10 +12,9 @@ import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 public class Dealer
     extends Thread {
 
-    private static final int MINUTE = 60000;
     private final UUID id = UUID.randomUUID();
     private final Storage<Car> carStorage;
-    @Setter private int saleTime = MINUTE;
+    @Setter private Integer saleTime;
 
     /**
      * If this thread was constructed using a separate {@code Runnable} run object, then that
@@ -27,18 +26,23 @@ public class Dealer
     @Override
     public void run() {
         while (true) {
-            if (saleTime > 0) {
-                try {
-                    Thread.sleep(saleTime);
+            if (saleTime == null) {
+                log.warn("Sale time is not set");
+                continue;
+            }
+            if (saleTime <= 0) {
+                log.warn("Sale time is zero or negative");
+                continue;
+            }
 
-                } catch (InterruptedException e) {
-                    log.warn(e);
-                    return;
-                }
+            try {
+                Thread.sleep(saleTime);
+            } catch (InterruptedException e) {
+                log.error(e);
+                return;
             }
 
             Car car = carStorage.takeProduct();
-
             log.info(String.format("Dealer <%s> bought %s", id, car));
         }
     }
