@@ -39,6 +39,7 @@ public class Storage<T extends Product>
 
     public void putProduct(T product) {
         synchronized (products) {
+            // Wait for storage to be released
             while (isFull()) {
                 try {
                     products.wait();
@@ -47,11 +48,14 @@ public class Storage<T extends Product>
                 }
             }
 
+            // Add product to storage
             products.add(product);
-            products.notifyAll();
-
             totalProductCount++;
 
+            // Allow others to add products to storage
+            products.notifyAll();
+
+            // Notify observers about storage state changing
             notifyObservers(
                 new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
         }
@@ -61,6 +65,7 @@ public class Storage<T extends Product>
         T product;
 
         synchronized (products) {
+            // Wait for storage to fill up
             while (isEmpty()) {
                 try {
                     products.wait();
@@ -69,9 +74,13 @@ public class Storage<T extends Product>
                 }
             }
 
+            // Take product from storage
             product = products.remove();
+
+            // Allow others to take products from storage
             products.notifyAll();
 
+            // Notify observers about storage state changing
             notifyObservers(
                 new StorageMovingContext(capacity, getCurrentProductCount(), totalProductCount));
         }
