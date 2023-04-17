@@ -12,6 +12,12 @@ import ru.nsu.ccfit.petrov.task4.observer.Observer;
 import ru.nsu.ccfit.petrov.task4.observer.context.Context;
 import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 
+/**
+ * The type {@code Car storage controller} is class which "wakes up" when a car is taken from the car storage, analyzes
+ * the car storage state and, if necessary, sends car assembly requests to the worker department.
+ *
+ * @author ptrvsrg
+ */
 public class CarStorageController
     implements Observer {
 
@@ -22,6 +28,15 @@ public class CarStorageController
     private final Storage<Car> carStorage;
     private final WorkerDepartment workerDepartment;
 
+    /**
+     * Constructs a CarStorageController.
+     *
+     * @param engineStorage    the engine storage
+     * @param bodyStorage      the body storage
+     * @param accessoryStorage the accessory storage
+     * @param carStorage       the car storage
+     * @param workerDepartment the worker department
+     */
     public CarStorageController(Storage<Engine> engineStorage, Storage<Body> bodyStorage,
                                 Storage<SeatCover> accessoryStorage, Storage<Car> carStorage,
                                 WorkerDepartment workerDepartment) {
@@ -53,8 +68,7 @@ public class CarStorageController
             return;
         }
 
-        evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(),
-                              carStorage.getCapacity());
+        evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(), carStorage.getCapacity());
     }
 
     private void evaluateStorageStatus(int currentCarCount, int carStorageCapacity) {

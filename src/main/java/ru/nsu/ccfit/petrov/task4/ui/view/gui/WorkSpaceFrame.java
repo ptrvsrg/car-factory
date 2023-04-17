@@ -13,7 +13,12 @@ import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.BodyInfoPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.CarInfoPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.EngineInfoPanel;
 
-public class GameSpaceFrame {
+/**
+ * The type {@code WorkSpaceFrame} is class that describes work space frame, all of its components and listeners.
+ *
+ * @author ptrvsrg
+ */
+public class WorkSpaceFrame {
 
     private static final String TITLE = "Car Factory";
     private final JFrame frame = new JFrame();
@@ -23,7 +28,12 @@ public class GameSpaceFrame {
     private final AccessoryInfoPanel accessoryInfoPanel;
     private final CarInfoPanel carInfoPanel;
 
-    public GameSpaceFrame(UIController controller) {
+    /**
+     * Constructs a WorkSpaceFrame.
+     *
+     * @param controller the controller
+     */
+    public WorkSpaceFrame(UIController controller) {
         this.controller = controller;
 
         controller.initFactory();
@@ -62,7 +72,7 @@ public class GameSpaceFrame {
         private static final String EXIT_CONFIRM_MESSAGE = "Are you sure?";
 
         /**
-         * Invoked when a window is in the process of being closed. The close operation can be overridden at this point.
+         * Invoked when the user attempts to close the window from the window's system menu.
          *
          * @param e the event to be processed
          */

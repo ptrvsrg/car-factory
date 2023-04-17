@@ -7,19 +7,36 @@ import ru.nsu.ccfit.petrov.task4.factory.product.Product;
 import ru.nsu.ccfit.petrov.task4.observer.Observable;
 import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 
+/**
+ * The type {@code Storage} is class that describes FIFO container that stores some products.
+ *
+ * @param <T> the type parameter
+ * @author ptrvsrg
+ */
 @Log4j2
 public class Storage<T extends Product>
     extends Observable {
 
     private final ArrayDeque<T> products;
-    @Getter private final int capacity;
+    @Getter
+    private final int capacity;
     private int totalProductCount = 0;
 
+    /**
+     * Constructs a Storage.
+     *
+     * @param capacity the capacity
+     */
     public Storage(int capacity) {
         this.capacity = capacity;
         this.products = new ArrayDeque<>(capacity);
     }
 
+    /**
+     * Gets current product count.
+     *
+     * @return the current product count
+     */
     public int getCurrentProductCount() {
         synchronized (products) {
             return products.size();
@@ -38,6 +55,11 @@ public class Storage<T extends Product>
         }
     }
 
+    /**
+     * Put product.
+     *
+     * @param product the product
+     */
     public void putProduct(T product) {
         synchronized (products) {
             // Wait for storage to be released
@@ -57,11 +79,15 @@ public class Storage<T extends Product>
             products.notifyAll();
 
             // Notify observers about storage state changing
-            notifyObservers(
-                new StorageMovingContext(getCurrentProductCount(), totalProductCount));
+            notifyObservers(new StorageMovingContext(getCurrentProductCount(), totalProductCount));
         }
     }
 
+    /**
+     * Take product.
+     *
+     * @return the product
+     */
     public T takeProduct() {
         T product;
 
@@ -82,8 +108,7 @@ public class Storage<T extends Product>
             products.notifyAll();
 
             // Notify observers about storage state changing
-            notifyObservers(
-                new StorageMovingContext(getCurrentProductCount(), totalProductCount));
+            notifyObservers(new StorageMovingContext(getCurrentProductCount(), totalProductCount));
         }
 
         return product;

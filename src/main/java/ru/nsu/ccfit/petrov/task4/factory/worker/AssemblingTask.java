@@ -9,6 +9,13 @@ import ru.nsu.ccfit.petrov.task4.factory.product.SeatCover;
 import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 import ru.nsu.ccfit.petrov.task4.threadpool.Task;
 
+/**
+ * The type {@code AssemblingTask} is class that implements {@link ru.nsu.ccfit.petrov.task4.threadpool.Task Task} for
+ * {@link ru.nsu.ccfit.petrov.task4.threadpool.ThreadPool ThreadPool} and assembles car (takes engine, body and set
+ * cover from storages and makes car from these details)
+ *
+ * @author ptrvsrg
+ */
 @Log4j2
 @RequiredArgsConstructor
 public class AssemblingTask
@@ -19,6 +26,9 @@ public class AssemblingTask
     private final Storage<SeatCover> seatCoverStorage;
     private final Storage<Car> carStorage;
 
+    /**
+     * Execute task.
+     */
     @Override
     public void execute() {
         Engine engine = engineStorage.takeProduct();

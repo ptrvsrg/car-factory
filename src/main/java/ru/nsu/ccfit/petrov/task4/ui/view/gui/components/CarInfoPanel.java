@@ -2,9 +2,20 @@ package ru.nsu.ccfit.petrov.task4.ui.view.gui.components;
 
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 
+/**
+ * The type {@code CarInfoPanel} is class that implements abstract methods of
+ *  {@link ru.nsu.ccfit.petrov.task4.ui.view.gui.components.InfoPanel InfoPanel} and describes car information.
+ *
+ * @author ptrvsrg
+ */
 public class CarInfoPanel
     extends InfoPanel {
 
+    /**
+     * Constructs a CarInfoPanel.
+     *
+     * @param controller the controller
+     */
     public CarInfoPanel(UIController controller) {
         super(controller);
         controller.addCarStorageObserver(this);

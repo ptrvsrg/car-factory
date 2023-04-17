@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.petrov.task4.ui.view.gui.components;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -16,6 +17,12 @@ import ru.nsu.ccfit.petrov.task4.observer.context.Context;
 import ru.nsu.ccfit.petrov.task4.observer.context.StorageMovingContext;
 import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 
+/**
+ * The type {@code Info panel} is abstract class that describes panel that contains product information, receives
+ * change message and sends requests to change factory state.
+ *
+ * @author ptrvsrg
+ */
 public abstract class InfoPanel
     extends JPanel
     implements Observer {
@@ -29,6 +36,11 @@ public abstract class InfoPanel
     private final JProgressBar currentProductCounter = new JProgressBar();
     private final JSlider timeSlider = new JSlider(JSlider.HORIZONTAL);
 
+    /**
+     * Constructs a InfoPanel.
+     *
+     * @param controller the controller
+     */
     protected InfoPanel(UIController controller) {
         this.controller = controller;
 
@@ -45,6 +57,7 @@ public abstract class InfoPanel
 
     private void initCurrentProductCount() {
         currentProductCounter.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
+        currentProductCounter.setForeground(Color.BLACK);
         setCurrentProductCount(0);
     }
 
@@ -81,12 +94,32 @@ public abstract class InfoPanel
         return titleLabel;
     }
 
+    /**
+     * Sets factory time.
+     *
+     * @param time the time
+     */
     protected abstract void setFactoryTime(int time);
 
+    /**
+     * Gets total product counter title.
+     *
+     * @return the total product counter title
+     */
     protected abstract String getTotalProductCounterTitle();
 
+    /**
+     * Gets current product counter title.
+     *
+     * @return the current product counter title
+     */
     protected abstract String getCurrentProductCounterTitle();
 
+    /**
+     * Gets time slider title.
+     *
+     * @return the time slider title
+     */
     protected abstract String getTimeSliderTitle();
 
     /**
@@ -116,6 +149,11 @@ public abstract class InfoPanel
         currentProductCounter.repaint();
     }
 
+    /**
+     * Gets storage capacity.
+     *
+     * @return the storage capacity
+     */
     protected abstract int getStorageCapacity();
 
     @RequiredArgsConstructor

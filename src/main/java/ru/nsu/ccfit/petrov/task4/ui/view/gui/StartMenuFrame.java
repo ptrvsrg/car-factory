@@ -19,6 +19,11 @@ import ru.nsu.ccfit.petrov.task4.ui.controller.UIController;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.BackgroundPanel;
 import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.MenuButton;
 
+/**
+ * The type {@code StartMenuFrame} is class that describes start menu frame, all of its components and listeners.
+ *
+ * @author ptrvsrg
+ */
 public class StartMenuFrame {
 
     private static final String TITLE = "Welcome To Car Factory";
@@ -32,6 +37,11 @@ public class StartMenuFrame {
     private final JFrame frame = new JFrame();
     private final UIController controller;
 
+    /**
+     * Constructs a StartMenuFrame.
+     *
+     * @param controller the controller
+     */
     public StartMenuFrame(UIController controller) {
         this.controller = controller;
 
@@ -84,7 +94,7 @@ public class StartMenuFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
-            SwingUtilities.invokeLater(() -> new GameSpaceFrame(controller));
+            SwingUtilities.invokeLater(() -> new WorkSpaceFrame(controller));
         }
     }
 
@@ -111,7 +121,7 @@ public class StartMenuFrame {
         private static final String EXIT_CONFIRM_MESSAGE = "Are you sure?";
 
         /**
-         * Invoked when a window is in the process of being closed. The close operation can be overridden at this point.
+         * Invoked when the user attempts to close the window from the window's system menu.
          *
          * @param e the event to be processed
          */

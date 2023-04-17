@@ -8,6 +8,12 @@ import lombok.extern.log4j.Log4j2;
 import ru.nsu.ccfit.petrov.task4.factory.product.Detail;
 import ru.nsu.ccfit.petrov.task4.factory.storage.Storage;
 
+/**
+ * The type {@code Supplier} is class that describes supplier thread that makes details and puts them into storage.
+ *
+ * @param <T> the type parameter
+ * @author ptrvsrg
+ */
 @Log4j2
 @RequiredArgsConstructor
 public class Supplier<T extends Detail>
@@ -16,12 +22,12 @@ public class Supplier<T extends Detail>
     private final UUID id = UUID.randomUUID();
     private final Storage<T> storage;
     private final Class<T> detailClass;
-    @Setter private Integer productionTime;
+    @Setter
+    private Integer productionTime;
 
     /**
-     * If this thread was constructed using a separate {@code Runnable} run object, then that
-     * {@code Runnable} object's {@code run} method is called; otherwise, this method does nothing
-     * and returns.
+     * If this thread was constructed using a separate {@code Runnable} run object, then that {@code Runnable} object's
+     * {@code run} method is called; otherwise, this method does nothing and returns.
      * <p>
      * Subclasses of {@code Thread} should override this method.
      */

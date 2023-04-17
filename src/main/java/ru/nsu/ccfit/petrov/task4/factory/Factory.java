@@ -15,6 +15,12 @@ import ru.nsu.ccfit.petrov.task4.factory.supplier.Supplier;
 import ru.nsu.ccfit.petrov.task4.factory.worker.WorkerDepartment;
 import ru.nsu.ccfit.petrov.task4.observer.Observer;
 
+/**
+ * The type {@code Factory} is class that describes factory, contains all its components, sets components dependencies,
+ * starts and stops threads.
+ *
+ * @author ptrvsrg
+ */
 @Log4j2
 public class Factory {
 
@@ -29,6 +35,9 @@ public class Factory {
     private final CarStorageController controller;
     private final List<Dealer> dealers;
 
+    /**
+     * Constructs a Factory.
+     */
     public Factory() {
         log.info("Create storages");
         engineStorage = new Storage<>(FactoryConfig.getEngineStorageCapacity());
@@ -48,8 +57,8 @@ public class Factory {
         workerDepartment = new WorkerDepartment(FactoryConfig.getWorkerCount());
 
         log.info("Create controller for car storage");
-        controller = new CarStorageController(engineStorage, bodyStorage, accessoryStorage,
-                                              carStorage, workerDepartment);
+        controller = new CarStorageController(engineStorage, bodyStorage, accessoryStorage, carStorage,
+                                              workerDepartment);
 
         log.info("Create dealers");
         dealers = new ArrayList<>();
@@ -59,41 +68,85 @@ public class Factory {
 
     }
 
+    /**
+     * Sets engine production time.
+     *
+     * @param productionTime the production time
+     */
     public void setEngineProductionTime(int productionTime) {
         engineSupplier.setProductionTime(productionTime);
     }
 
+    /**
+     * Sets body production time.
+     *
+     * @param productionTime the production time
+     */
     public void setBodyProductionTime(int productionTime) {
         bodySupplier.setProductionTime(productionTime);
     }
 
+    /**
+     * Sets accessory production time.
+     *
+     * @param productionTime the production time
+     */
     public void setAccessoryProductionTime(int productionTime) {
         for (Supplier<SeatCover> accessorySupplier : accessorySuppliers) {
             accessorySupplier.setProductionTime(productionTime);
         }
     }
 
+    /**
+     * Sets car sale time.
+     *
+     * @param saleTime the sale time
+     */
     public void setCarSaleTime(int saleTime) {
         for (Dealer dealer : dealers) {
             dealer.setSaleTime(saleTime);
         }
     }
+
+    /**
+     * Add engine storage observer.
+     *
+     * @param observer the observer
+     */
     public void addEngineStorageObserver(Observer observer) {
         engineStorage.addObserver(observer);
     }
 
+    /**
+     * Add body storage observer.
+     *
+     * @param observer the observer
+     */
     public void addBodyStorageObserver(Observer observer) {
         bodyStorage.addObserver(observer);
     }
 
+    /**
+     * Add accessory storage observer.
+     *
+     * @param observer the observer
+     */
     public void addAccessoryStorageObserver(Observer observer) {
         accessoryStorage.addObserver(observer);
     }
 
+    /**
+     * Add car storage observer.
+     *
+     * @param observer the observer
+     */
     public void addCarStorageObserver(Observer observer) {
         carStorage.addObserver(observer);
     }
 
+    /**
+     * Start factory.
+     */
     public void start() {
         log.info("Start factory");
         engineSupplier.start();
@@ -107,6 +160,9 @@ public class Factory {
         }
     }
 
+    /**
+     * Stop factory.
+     */
     public void stop() {
         log.info("Stop factory");
         engineSupplier.interrupt();
