@@ -18,7 +18,7 @@ public class AccessoryInfoPanel
      */
     public AccessoryInfoPanel(UIController controller) {
         super(controller);
-        controller.addCarStorageObserver(this);
+        controller.addAccessoryStorageObserver(this);
     }
 
     @Override
