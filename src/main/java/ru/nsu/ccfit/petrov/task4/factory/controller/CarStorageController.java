@@ -32,6 +32,10 @@ public class CarStorageController
         this.workerDepartment = workerDepartment;
 
         carStorage.addObserver(this);
+
+        for (int i = 0; i < carStorage.getCapacity(); ++i) {
+            assembleCar();
+        }
     }
 
     private void assembleCar() {
