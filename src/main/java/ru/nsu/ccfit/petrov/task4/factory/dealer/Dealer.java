@@ -43,7 +43,6 @@ public class Dealer
             try {
                 Thread.sleep(saleTime);
             } catch (InterruptedException e) {
-                log.error(e);
                 return;
             }
 

@@ -67,7 +67,7 @@ public class Storage<T extends Product>
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
-                    log.warn(e);
+                    return;
                 }
             }
 
@@ -89,7 +89,7 @@ public class Storage<T extends Product>
      * @return the product
      */
     public T takeProduct() {
-        T product;
+        T product = null;
 
         synchronized (products) {
             // Wait for storage to fill up
@@ -97,7 +97,7 @@ public class Storage<T extends Product>
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
-                    log.warn(e);
+                    return product;
                 }
             }
 

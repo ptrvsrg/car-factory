@@ -38,7 +38,6 @@ public class TaskThread
             try {
                 task = queue.take();
             } catch (InterruptedException e) {
-                log.error(e);
                 return;
             }
 

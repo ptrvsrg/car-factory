@@ -49,7 +49,6 @@ public class Supplier<T extends Detail>
                 product = detailClass.getDeclaredConstructor().newInstance();
             } catch (InterruptedException | IllegalAccessException | InvocationTargetException |
                      InstantiationException | NoSuchMethodException e) {
-                log.error(e);
                 return;
             }
 
