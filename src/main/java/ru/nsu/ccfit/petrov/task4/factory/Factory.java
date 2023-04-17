@@ -30,8 +30,6 @@ public class Factory {
     private final List<Dealer> dealers;
 
     public Factory() {
-        Thread.currentThread().setName("Factory");
-
         log.info("Create storages");
         engineStorage = new Storage<>(FactoryConfig.getEngineStorageCapacity());
         bodyStorage = new Storage<>(FactoryConfig.getBodyStorageCapacity());
