@@ -10,6 +10,10 @@ public class ThreadPool {
     private final List<TaskThread> threads = new ArrayList<>();
     private final BlockingQueue<Task> queue = new LinkedBlockingQueue<>();
 
+    public int getQueueSize() {
+        return queue.size();
+    }
+
     public boolean addTask(Task task) {
         return queue.offer(task);
     }

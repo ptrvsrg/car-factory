@@ -13,15 +13,19 @@ public class WorkerDepartment {
         }
     }
 
+    public int getQueueSize() {
+        return threadPool.getQueueSize();
+    }
+
+    public boolean addTask(Task task) {
+        return threadPool.addTask(task);
+    }
+
     public void start() {
         threadPool.start();
     }
 
     public void stop() {
         threadPool.stop();
-    }
-
-    public boolean addTask(Task task) {
-        return threadPool.addTask(task);
     }
 }
