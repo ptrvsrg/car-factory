@@ -164,15 +164,16 @@ public class Factory {
      * Stop factory.
      */
     public void stop() {
-        log.info("Stop factory");
+        for (Dealer dealer : dealers) {
+            dealer.interrupt();
+        }
+        workerDepartment.stop();
         engineSupplier.interrupt();
         bodySupplier.interrupt();
         for (Supplier<SeatCover> accessorySupplier : accessorySuppliers) {
             accessorySupplier.interrupt();
         }
-        workerDepartment.stop();
-        for (Dealer dealer : dealers) {
-            dealer.interrupt();
-        }
+
+        log.info("Stop factory");
     }
 }
