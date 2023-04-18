@@ -61,6 +61,10 @@ public class Storage<T extends Product>
      * @param product the product
      */
     public void putProduct(T product) {
+        if (product == null) {
+            return;
+        }
+
         synchronized (products) {
             // Wait for storage to be released
             while (isFull() && !Thread.currentThread().isInterrupted()) {

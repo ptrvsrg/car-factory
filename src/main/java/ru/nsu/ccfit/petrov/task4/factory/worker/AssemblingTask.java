@@ -36,6 +36,14 @@ public class AssemblingTask
         Body body = bodyStorage.takeProduct();
         SeatCover seatCover = seatCoverStorage.takeProduct();
 
+        // If some detail is not taken, then return the taken details to the storage and finish the task
+        if (engine == null || body == null || seatCover == null) {
+            engineStorage.putProduct(engine);
+            bodyStorage.putProduct(body);
+            seatCoverStorage.putProduct(seatCover);
+            return;
+        }
+
         Car car = new Car(engine, body, seatCover);
 
         carStorage.putProduct(car);

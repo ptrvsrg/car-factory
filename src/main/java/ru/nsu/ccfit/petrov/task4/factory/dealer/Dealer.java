@@ -47,7 +47,9 @@ public class Dealer
             }
 
             Car car = carStorage.takeProduct();
-            log.info(String.format("Dealer <%s> bought %s", id, car));
+            if (car != null ) {
+                log.info(String.format("Dealer <%s> bought %s", id, car));
+            }
         }
     }
 }
