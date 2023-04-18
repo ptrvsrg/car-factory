@@ -63,7 +63,7 @@ public class Storage<T extends Product>
     public void putProduct(T product) {
         synchronized (products) {
             // Wait for storage to be released
-            while (isFull()) {
+            while (isFull() && !Thread.currentThread().isInterrupted()) {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {
@@ -93,7 +93,7 @@ public class Storage<T extends Product>
 
         synchronized (products) {
             // Wait for storage to fill up
-            while (isEmpty()) {
+            while (isEmpty() && !Thread.currentThread().isInterrupted()) {
                 try {
                     products.wait();
                 } catch (InterruptedException e) {

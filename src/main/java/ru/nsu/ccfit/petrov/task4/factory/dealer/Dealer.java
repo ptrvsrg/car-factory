@@ -30,7 +30,7 @@ public class Dealer
      */
     @Override
     public void run() {
-        while (true) {
+        while (!isInterrupted()) {
             if (saleTime == null) {
                 log.warn("Sale time is not set");
                 continue;
