@@ -48,6 +48,7 @@ public class CarStorageController
 
         carStorage.addObserver(this);
 
+        // Initial filling of car storage
         for (int i = 0; i < carStorage.getCapacity(); ++i) {
             assembleCar();
         }
@@ -68,6 +69,7 @@ public class CarStorageController
             return;
         }
 
+        // Analyze car storage filling
         evaluateStorageStatus(((StorageMovingContext) context).getCurrentProductCount(), carStorage.getCapacity());
     }
 
@@ -75,6 +77,7 @@ public class CarStorageController
         int minCarCount = (int) (carStorageCapacity * OCCUPANCY_PERCENTAGE);
         int assemblingCarCount = workerDepartment.getQueueSize();
 
+        // If car storage filling percentage is less than OCCUPANCY_PERCENTAGE, then send assembly requests
         if (currentCarCount + assemblingCarCount < minCarCount) {
             for (int i = 0; i < carStorageCapacity - minCarCount; ++i) {
                 assembleCar();

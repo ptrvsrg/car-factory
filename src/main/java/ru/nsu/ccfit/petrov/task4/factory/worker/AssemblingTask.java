@@ -31,6 +31,7 @@ public class AssemblingTask
      */
     @Override
     public void execute() {
+        // Take car details
         Engine engine = engineStorage.takeProduct();
         Body body = bodyStorage.takeProduct();
         SeatCover seatCover = seatCoverStorage.takeProduct();
