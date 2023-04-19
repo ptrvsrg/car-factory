@@ -1,5 +1,6 @@
 package ru.nsu.ccfit.petrov.task4.ui.view.gui;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -52,16 +53,18 @@ public class WorkSpaceFrame {
 
     private void initFrame() {
         frame.setTitle(TITLE);
-        frame.setSize(800, 600);
+        frame.setSize(1200, 700);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        frame.setLayout(new GridLayout(4, 1));
+        frame.setLayout(new GridLayout(2, 2, 5, 5));
         frame.addWindowListener(new WindowClosingListener());
 
-        frame.add(engineInfoPanel);
-        frame.add(bodyInfoPanel);
-        frame.add(accessoryInfoPanel);
-        frame.add(carInfoPanel);
+        frame.getContentPane().setBackground(Color.WHITE);
+        frame.getContentPane().add(engineInfoPanel);
+        frame.getContentPane().add(bodyInfoPanel);
+        frame.getContentPane().add(accessoryInfoPanel);
+        frame.getContentPane().add(carInfoPanel);
     }
 
     @RequiredArgsConstructor
