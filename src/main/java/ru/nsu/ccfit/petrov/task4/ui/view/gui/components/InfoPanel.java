@@ -2,14 +2,16 @@ package ru.nsu.ccfit.petrov.task4.ui.view.gui.components;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JSlider;
-import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 import lombok.RequiredArgsConstructor;
 import ru.nsu.ccfit.petrov.task4.observer.Observable;
 import ru.nsu.ccfit.petrov.task4.observer.Observer;
@@ -29,8 +31,8 @@ public abstract class InfoPanel
 
     private static final int SLIDER_MAX_VALUE = 30;
     private static final int SLIDER_MAJOR_SPACING = SLIDER_MAX_VALUE / 6;
-    private static final int BORDER_SIZE = 10;
-    private static final int FONT_SIZE = 20;
+    private static final int SLIDER_MINOR_SPACING = 1;
+    private static final Font FONT = new Font(Font.DIALOG, Font.PLAIN, 32);
     protected final UIController controller;
     private final JLabel totalProductCounter = new JLabel();
     private final JProgressBar currentProductCounter = new JProgressBar();
@@ -43,55 +45,95 @@ public abstract class InfoPanel
      */
     protected InfoPanel(UIController controller) {
         this.controller = controller;
-
-        initTotalProductCount();
-        initCurrentProductCount();
-        initTimeSlider();
         initPanel();
     }
 
+    private void initPanel() {
+        initTotalProductCount();
+        initCurrentProductCount();
+        initTimeSlider();
+
+        setBackground(Color.WHITE);
+        setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 0;
+        add(totalProductCounter, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 2;
+        add(currentProductCounter, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 4;
+        add(createSliderTitle(), gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 5;
+        add(timeSlider, gbc);
+    }
+
     private void initTotalProductCount() {
-        totalProductCounter.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
+        totalProductCounter.setHorizontalAlignment(SwingConstants.CENTER);
+        totalProductCounter.setFont(FONT);
         setTotalProductCount(0);
     }
 
     private void initCurrentProductCount() {
-        currentProductCounter.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
-        currentProductCounter.setForeground(Color.BLACK);
+        currentProductCounter.setFont(FONT);
+        currentProductCounter.setBorderPainted(false);
+        currentProductCounter.setStringPainted(true);
+        currentProductCounter.setForeground(Color.BLUE);
+        currentProductCounter.setBackground(Color.WHITE);
+        currentProductCounter.setUI(new BasicProgressBarUI() {
+            protected Color getSelectionBackground() {
+                return Color.BLACK;
+            }
+
+            protected Color getSelectionForeground() {
+                return Color.WHITE;
+            }
+        });
         setCurrentProductCount(0);
     }
 
     private void initTimeSlider() {
+        timeSlider.setBackground(Color.WHITE);
+        timeSlider.setFont(FONT);
+        timeSlider.setMajorTickSpacing(SLIDER_MAJOR_SPACING);
+        timeSlider.setMinorTickSpacing(SLIDER_MINOR_SPACING);
+        timeSlider.setPaintTrack(true);
+        timeSlider.setPaintTicks(true);
+        timeSlider.setPaintLabels(true);
         timeSlider.setMinimum(0);
         timeSlider.setMaximum(SLIDER_MAX_VALUE);
         timeSlider.setValue(SLIDER_MAX_VALUE / 2);
-        timeSlider.setMajorTickSpacing(SLIDER_MAJOR_SPACING);
-        timeSlider.setPaintTrack(true);
-        timeSlider.setPaintLabels(true);
         timeSlider.addChangeListener(new SliderListener());
 
         setFactoryTime(SLIDER_MAX_VALUE / 2);
     }
 
-    private void initPanel() {
-        setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
-        setLayout(new GridLayout(3, 2, BORDER_SIZE, BORDER_SIZE));
+    private JLabel createSliderTitle() {
+        JLabel sliderTitle = new JLabel();
+        sliderTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        sliderTitle.setFont(FONT);
+        sliderTitle.setText(getTimeSliderTitle());
 
-        add(createTitleLabel(getTotalProductCounterTitle()));
-        add(totalProductCounter);
-
-        add(createTitleLabel(getCurrentProductCounterTitle()));
-        add(currentProductCounter);
-
-        add(createTitleLabel(getTimeSliderTitle()));
-        add(timeSlider);
+        return sliderTitle;
     }
 
-    private JLabel createTitleLabel(String title) {
-        JLabel titleLabel = new JLabel();
-        titleLabel.setText(title);
-        titleLabel.setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
-        return titleLabel;
+    private void setTotalProductCount(Integer totalProductCount) {
+        totalProductCounter.setText(getTotalProductCounterTitle() + totalProductCount);
+        totalProductCounter.repaint();
+    }
+
+    private void setCurrentProductCount(Integer currentProductCount) {
+        String values = String.format("%s / %s", currentProductCount, getStorageCapacity());
+        currentProductCounter.setString(getCurrentProductCounterTitle() + values);
+        currentProductCounter.setValue(100 * currentProductCount / getStorageCapacity());
+        currentProductCounter.repaint();
     }
 
     /**
@@ -137,18 +179,6 @@ public abstract class InfoPanel
         setTotalProductCount(((StorageMovingContext) context).getTotalProductCount());
     }
 
-    private void setTotalProductCount(Integer totalProductCount) {
-        totalProductCounter.setText(totalProductCount.toString());
-        totalProductCounter.repaint();
-    }
-
-    private void setCurrentProductCount(Integer currentProductCount) {
-        currentProductCounter.setString(String.format("%s / %s", currentProductCount, getStorageCapacity()));
-        currentProductCounter.setValue(100 * currentProductCount / getStorageCapacity());
-        currentProductCounter.setStringPainted(true);
-        currentProductCounter.repaint();
-    }
-
     /**
      * Gets storage capacity.
      *
@@ -167,7 +197,7 @@ public abstract class InfoPanel
          */
         @Override
         public void stateChanged(ChangeEvent e) {
-            int time = timeSlider.getValue();
+            int time = Math.min(1, timeSlider.getValue());
             setFactoryTime(time);
         }
     }
