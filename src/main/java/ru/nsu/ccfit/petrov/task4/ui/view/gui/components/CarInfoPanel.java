@@ -23,17 +23,17 @@ public class CarInfoPanel
 
     @Override
     protected String getTotalProductCounterTitle() {
-        return "Total car count: ";
+        return "Car produced: ";
     }
 
     @Override
     protected String getCurrentProductCounterTitle() {
-        return "Current car count: ";
+        return "Cars in storage: ";
     }
 
     @Override
     protected String getTimeSliderTitle() {
-        return "Car sale time: ";
+        return "Car sale time in sec: ";
     }
 
     @Override

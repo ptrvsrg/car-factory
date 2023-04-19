@@ -23,17 +23,17 @@ public class BodyInfoPanel
 
     @Override
     protected String getTotalProductCounterTitle() {
-        return "Total body count: ";
+        return "Body produced: ";
     }
 
     @Override
     protected String getCurrentProductCounterTitle() {
-        return "Current body count: ";
+        return "Bodies in storage: ";
     }
 
     @Override
     protected String getTimeSliderTitle() {
-        return "Body production time: ";
+        return "Body production time in sec: ";
     }
 
     @Override

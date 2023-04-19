@@ -23,17 +23,17 @@ public class AccessoryInfoPanel
 
     @Override
     protected String getTotalProductCounterTitle() {
-        return "Total accessory count: ";
+        return "Accessory produced: ";
     }
 
     @Override
     protected String getCurrentProductCounterTitle() {
-        return "Current accessory count: ";
+        return "Accessories in storage: ";
     }
 
     @Override
     protected String getTimeSliderTitle() {
-        return "Accessory production time: ";
+        return "Accessory production time in sec: ";
     }
 
     @Override

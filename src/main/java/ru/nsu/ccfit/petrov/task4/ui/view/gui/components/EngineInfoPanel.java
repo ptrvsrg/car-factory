@@ -23,17 +23,17 @@ public class EngineInfoPanel
 
     @Override
     protected String getTotalProductCounterTitle() {
-        return "Total engine count: ";
+        return "Engine produced: ";
     }
 
     @Override
     protected String getCurrentProductCounterTitle() {
-        return "Current engine count: ";
+        return "Engines in storages: ";
     }
 
     @Override
     protected String getTimeSliderTitle() {
-        return "Engine production time: ";
+        return "Engine production time in sec: ";
     }
 
     @Override
