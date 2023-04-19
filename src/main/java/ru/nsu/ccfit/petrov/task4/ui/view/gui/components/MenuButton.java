@@ -11,7 +11,7 @@ import javax.swing.JButton;
  */
 public class MenuButton
     extends JButton {
-    private static final int FONT_SIZE = 40;
+    private static final int FONT_SIZE = 48;
 
     /**
      * Instantiates a new MenuButton.
@@ -23,7 +23,7 @@ public class MenuButton
         setContentAreaFilled(false);
         setBorderPainted(false);
         setFocusPainted(false);
-        setFont(new Font(Font.DIALOG, Font.BOLD, FONT_SIZE));
-        setForeground(Color.WHITE);
+        setFont(new Font(Font.DIALOG, Font.PLAIN, FONT_SIZE));
+        setForeground(Color.BLACK);
     }
 }
