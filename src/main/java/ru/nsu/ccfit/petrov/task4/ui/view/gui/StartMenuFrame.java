@@ -51,7 +51,7 @@ public class StartMenuFrame {
 
     private void initFrame() {
         frame.setTitle(TITLE);
-        frame.setSize(800, 600);
+        frame.setSize(1200, 700);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
