@@ -27,7 +27,7 @@ public abstract class InfoPanel
     extends JPanel
     implements Observer {
 
-    private static final int SLIDER_MAX_VALUE = 30000;
+    private static final int SLIDER_MAX_VALUE = 30;
     private static final int SLIDER_MAJOR_SPACING = SLIDER_MAX_VALUE / 6;
     private static final int BORDER_SIZE = 10;
     private static final int FONT_SIZE = 20;

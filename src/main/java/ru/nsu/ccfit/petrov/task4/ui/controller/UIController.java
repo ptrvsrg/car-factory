@@ -87,7 +87,7 @@ public class UIController {
      */
     public void setEngineProductionTime(int engineProductionTime) {
         checkFactory();
-        factory.setEngineProductionTime(engineProductionTime);
+        factory.setEngineProductionTime(engineProductionTime * 1000);
     }
 
     /**
@@ -97,7 +97,7 @@ public class UIController {
      */
     public void setBodyProductionTime(int bodyProductionTime) {
         checkFactory();
-        factory.setBodyProductionTime(bodyProductionTime);
+        factory.setBodyProductionTime(bodyProductionTime * 1000);
     }
 
     /**
@@ -107,7 +107,7 @@ public class UIController {
      */
     public void setAccessoryProductionTime(int accessoryProductionTime) {
         checkFactory();
-        factory.setAccessoryProductionTime(accessoryProductionTime);
+        factory.setAccessoryProductionTime(accessoryProductionTime * 1000);
     }
 
     /**
@@ -117,7 +117,7 @@ public class UIController {
      */
     public void setCarSaleTime(int saleTime) {
         checkFactory();
-        factory.setCarSaleTime(saleTime);
+        factory.setCarSaleTime(saleTime * 1000);
     }
 
     /**
