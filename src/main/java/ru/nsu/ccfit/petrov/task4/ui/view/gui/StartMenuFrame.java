@@ -27,7 +27,7 @@ import ru.nsu.ccfit.petrov.task4.ui.view.gui.components.MenuButton;
 public class StartMenuFrame {
 
     private static final String TITLE = "Welcome To Car Factory";
-    private static final String BACKGROUND_IMAGE_FILE = "start_menu_background.png";
+    private static final String BACKGROUND_IMAGE_FILE = "start_menu_background.gif";
     private static final String START_BUTTON_TITLE = "Start";
     private static final String ABOUT_BUTTON_TITLE = "About";
     private static final String ABOUT_PANEL_TITLE = "About";
