@@ -1,6 +1,8 @@
 package ru.nsu.ccfit.petrov.task4.ui.view.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -56,13 +58,21 @@ public class StartMenuFrame {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowClosingListener());
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
+        frame.getContentPane().setBackground(Color.WHITE);
+        frame.getContentPane().add(createBackgroundPanel());
+        frame.getContentPane().add(createButtonArea());
+    }
+
+    private BackgroundPanel createBackgroundPanel() {
         URL url = StartMenuFrame.class.getClassLoader().getResource(BACKGROUND_IMAGE_FILE);
         Image backgroundImage = Toolkit.getDefaultToolkit().getImage(url);
-        BackgroundPanel contentPane = new BackgroundPanel(backgroundImage);
-        contentPane.add(createButtonArea());
+        BackgroundPanel backgroundPanel = new BackgroundPanel(backgroundImage);
 
-        frame.setContentPane(contentPane);
+        backgroundPanel.setPreferredSize(new Dimension(3 * frame.getWidth() / 4, frame.getHeight()));
+
+        return backgroundPanel;
     }
 
     private JPanel createButtonArea() {
@@ -72,6 +82,8 @@ public class StartMenuFrame {
         buttonArea.setLayout(new GridLayout(2, 1));
         buttonArea.add(createMenuButton(START_BUTTON_TITLE, new StartButtonListener()));
         buttonArea.add(createMenuButton(ABOUT_BUTTON_TITLE, new AboutButtonListener()));
+
+        buttonArea.setPreferredSize(new Dimension(frame.getWidth() / 4, frame.getHeight()));
 
         return buttonArea;
     }
