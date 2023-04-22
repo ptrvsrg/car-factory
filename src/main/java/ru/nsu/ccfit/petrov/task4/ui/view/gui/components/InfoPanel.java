@@ -88,12 +88,26 @@ public abstract class InfoPanel
         currentProductCounter.setForeground(Color.BLUE);
         currentProductCounter.setBackground(Color.WHITE);
         currentProductCounter.setUI(new BasicProgressBarUI() {
-            protected Color getSelectionBackground() {
-                return Color.BLACK;
-            }
-
+            /**
+             * The "selectionForeground" is the color of the text when it is painted over a filled
+             * area of the progress bar.
+             *
+             * @return the color of the selected foreground
+             */
+            @Override
             protected Color getSelectionForeground() {
                 return Color.WHITE;
+            }
+
+            /**
+             * The "selectionBackground" is the color of the text when it is painted over an
+             * unfilled area of the progress bar.
+             *
+             * @return the color of the selected background
+             */
+            @Override
+            protected Color getSelectionBackground() {
+                return Color.BLACK;
             }
         });
         setCurrentProductCount(0);
