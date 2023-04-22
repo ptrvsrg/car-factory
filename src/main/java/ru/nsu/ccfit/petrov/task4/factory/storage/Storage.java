@@ -18,8 +18,7 @@ public class Storage<T extends Product>
     extends Observable {
 
     private final ArrayDeque<T> products;
-    @Getter
-    private final int capacity;
+    @Getter private final int capacity;
     private int totalProductCount = 0;
 
     /**
