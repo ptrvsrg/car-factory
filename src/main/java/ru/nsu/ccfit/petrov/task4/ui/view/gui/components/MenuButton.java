@@ -11,6 +11,7 @@ import javax.swing.JButton;
  */
 public class MenuButton
     extends JButton {
+
     private static final int FONT_SIZE = 48;
 
     /**
