@@ -1,13 +1,14 @@
 package ru.nsu.ccfit.petrov.task4.factory.product;
 
-import lombok.Getter;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
 
 /**
  * The type {@code Car} is class that describes car and stores its details.
  *
  * @author ptrvsrg
  */
-@Getter
+@Log4j2
 public class Car
     extends Product {
 
@@ -23,6 +24,11 @@ public class Car
      * @param seatCover the seat cover
      */
     public Car(Engine engine, Body body, SeatCover seatCover) {
+        if (engine == null || body == null || seatCover == null) {
+            log.catching(Level.FATAL, new IllegalArgumentException("Detail cannot be null"));
+            System.exit(1);
+        }
+
         this.engine = engine;
         this.body = body;
         this.seatCover = seatCover;
