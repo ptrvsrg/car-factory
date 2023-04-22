@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Level;
 public class FactoryConfig {
 
     private static final String FACTORY_PROPERTIES_FILE = "factory.properties";
-    private static Properties factorySettings;
+    private static final Properties factorySettings;
 
     private FactoryConfig() {
         throw new IllegalStateException("Utility class");
@@ -32,7 +32,7 @@ public class FactoryConfig {
             factorySettings.load(configStream);
         } catch (Exception e) {
             log.catching(Level.FATAL, e);
-            System.exit(1);
+            throw new RuntimeException(e);
         }
     }
 
@@ -41,10 +41,8 @@ public class FactoryConfig {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             log.catching(Level.FATAL, e);
-            System.exit(1);
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     /**
