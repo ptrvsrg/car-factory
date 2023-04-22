@@ -19,8 +19,7 @@ public class Dealer
 
     private final UUID id = UUID.randomUUID();
     private final Storage<Car> carStorage;
-    @Setter
-    private Integer saleTime;
+    @Setter private Integer saleTime;
 
     /**
      * If this thread was constructed using a separate {@code Runnable} run object, then that {@code Runnable} object's
