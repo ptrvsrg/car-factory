@@ -79,7 +79,7 @@ public class CarStorageController
 
         // If car storage filling percentage is less than OCCUPANCY_PERCENTAGE, then send assembly requests
         if (currentCarCount + assemblingCarCount < minCarCount) {
-            for (int i = 0; i < carStorageCapacity - minCarCount; ++i) {
+            for (int i = 0; i < carStorageCapacity - currentCarCount - assemblingCarCount; ++i) {
                 assembleCar();
             }
         }
