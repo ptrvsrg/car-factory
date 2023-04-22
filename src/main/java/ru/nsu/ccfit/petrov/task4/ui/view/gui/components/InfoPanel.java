@@ -197,7 +197,8 @@ public abstract class InfoPanel
          */
         @Override
         public void stateChanged(ChangeEvent e) {
-            int time = Math.min(1, timeSlider.getValue());
+            int time = Math.max(1, timeSlider.getValue());
+
             setFactoryTime(time);
         }
     }
