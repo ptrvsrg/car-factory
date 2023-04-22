@@ -6,6 +6,4 @@ package ru.nsu.ccfit.petrov.task4.factory.product;
  * @author ptrvsrg
  */
 public class Detail
-    extends Product {
-
-}
+    extends Product {}
