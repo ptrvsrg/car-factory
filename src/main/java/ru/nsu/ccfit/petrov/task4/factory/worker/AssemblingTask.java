@@ -23,7 +23,7 @@ public class AssemblingTask
 
     private final Storage<Engine> engineStorage;
     private final Storage<Body> bodyStorage;
-    private final Storage<SeatCover> seatCoverStorage;
+    private final Storage<SeatCover> accessoryStorage;
     private final Storage<Car> carStorage;
 
     /**
@@ -34,13 +34,13 @@ public class AssemblingTask
         // Take car details
         Engine engine = engineStorage.takeProduct();
         Body body = bodyStorage.takeProduct();
-        SeatCover seatCover = seatCoverStorage.takeProduct();
+        SeatCover seatCover = accessoryStorage.takeProduct();
 
         // If some detail is not taken, then return the taken details to the storage and finish the task
         if (engine == null || body == null || seatCover == null) {
             engineStorage.putProduct(engine);
             bodyStorage.putProduct(body);
-            seatCoverStorage.putProduct(seatCover);
+            accessoryStorage.putProduct(seatCover);
             return;
         }
 
