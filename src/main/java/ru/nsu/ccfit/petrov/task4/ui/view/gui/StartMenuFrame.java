@@ -34,8 +34,10 @@ public class StartMenuFrame {
     private static final String ABOUT_BUTTON_TITLE = "About";
     private static final String ABOUT_PANEL_TITLE = "About";
     private static final String ABOUT_PANEL_MESSAGE =
-        "Program \"Minesweeper v1.0\"\n" + "Designer: ptrvsrg\n" + "Developer: ptrvsrg\n"
-            + "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task4";
+        "Program \"Minesweeper v1.0\"\n" +
+        "Designer: ptrvsrg\n" +
+        "Developer: ptrvsrg\n" +
+        "Source code: https://github.com/ptrvsrg/NSU_OOP_Java/tree/master/Task4";
     private final JFrame frame = new JFrame();
     private final UIController controller;
 
