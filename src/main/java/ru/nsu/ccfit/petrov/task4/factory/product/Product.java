@@ -1,7 +1,6 @@
 package ru.nsu.ccfit.petrov.task4.factory.product;
 
 import java.util.UUID;
-import lombok.Getter;
 
 /**
  * The type {@code Product} is class that describes all objects that stored in some storages. Each product have unique
@@ -9,7 +8,6 @@ import lombok.Getter;
  *
  * @author ptrvsrg
  */
-@Getter
 public class Product {
 
     private final UUID id = UUID.randomUUID();
