@@ -28,7 +28,7 @@ public class TaskThread
      */
     @Override
     public void run() {
-        while (!isInterrupted()) {
+        while (isAlive()) {
             if (queue == null) {
                 log.warn("Queue is not set");
                 continue;
