@@ -33,7 +33,7 @@ public class Supplier<T extends Detail>
      */
     @Override
     public void run() {
-        while (!isInterrupted()) {
+        while (isAlive()) {
             if (productionTime == null) {
                 log.warn("Production time is not set");
                 continue;
