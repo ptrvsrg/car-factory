@@ -42,17 +42,6 @@ public class Observable {
     }
 
     /**
-     * Removes all observers.
-     */
-    public void removeObservers() {
-        if (observers == null) {
-            return;
-        }
-
-        observers.clear();
-    }
-
-    /**
      * Notifies observers.
      *
      * @param context the context
