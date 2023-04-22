@@ -22,8 +22,7 @@ public class Supplier<T extends Detail>
     private final UUID id = UUID.randomUUID();
     private final Storage<T> storage;
     private final Class<T> detailClass;
-    @Setter
-    private Integer productionTime;
+    @Setter private Integer productionTime;
 
     /**
      * If this thread was constructed using a separate {@code Runnable} run object, then that {@code Runnable} object's
