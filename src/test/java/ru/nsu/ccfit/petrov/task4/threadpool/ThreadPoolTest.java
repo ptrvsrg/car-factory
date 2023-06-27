@@ -143,7 +143,8 @@ public class ThreadPoolTest
 
     @Test(description = "Check stopping thread pool",
           groups = "Thread pool tests")
-    public void checkStop() {
+    public void checkStop()
+        throws InterruptedException {
         // prepare
         List<TaskThread> threads = new ArrayList<>();
         for (int i = 0; i < THREAD_POOL_SIZE; ++i) {
@@ -155,10 +156,11 @@ public class ThreadPoolTest
         // do
         threadPool.start();
         threadPool.stop();
+        Thread.sleep(100);
 
         // check
         for (TaskThread thread : threads) {
-            assertThat(thread.isAlive()).isTrue();
+            assertThat(thread.isAlive()).isFalse();
         }
     }
 }
